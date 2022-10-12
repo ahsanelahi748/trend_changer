@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getTimeStamp, HTTP, sendErrorResponse, sendResponse } from './common';
+import { getTimeStamp, HTTP, sendErrorResponse, sendResponse } from '../common';
 import { Show } from './show.model';
 
 export const getAllShows = async (req: Request, res: Response) => {

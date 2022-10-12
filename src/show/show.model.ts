@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-import { getTimeStamp } from './common';
+import { getTimeStamp } from '../common';
 
 const schema = new mongoose.Schema({
     // _id: String, not needed mongoose generates itself

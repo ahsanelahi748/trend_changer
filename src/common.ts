@@ -1,9 +1,12 @@
 import { Response } from 'express';
 
+export const USER_IMAGE_PATH = "/tmp/";
+
 export enum HTTP {
     BAD_REQUEST = 400,
     SERVER_ERROR = 500,
-    OK = 200
+    OK = 200,
+    CREATED = 200
 }
 
 export const sendResponse = (res: Response, code: number, message: string, data: any) => {

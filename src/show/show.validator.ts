@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import joi from "joi";
-import { HTTP, sendErrorResponse } from './common';
+import { HTTP, sendErrorResponse } from '../common';
 
 export const showValidator = {
     validateGetShow: async (req: Request, res: Response, next: NextFunction) => {
