@@ -19,5 +19,19 @@ export const FeedValidator = {
             console.error(error);
             sendErrorResponse(res, HTTP.BAD_REQUEST, error.message);
         }
+    },
+
+    async validateCommentCreate(req: Request, res: Response, next: NextFunction) {
+        try {
+            await joi.object({
+                postId: joi.string().alphanum().min(24).required(),
+                content: joi.string().min(1).required(),
+                replyCommentId: joi.string().alphanum().min(24)
+            }).validateAsync(req.body);
+            next();
+        } catch (error: any) {
+            console.error(error);
+            sendErrorResponse(res, HTTP.BAD_REQUEST, error.message);
+        }
     }
 };

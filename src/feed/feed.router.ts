@@ -10,4 +10,9 @@ FeedRouter.post("/", FeedMiddlewares.validateRequestOrigin,
     FeedValidator.validatePostCreate,
     FeedController.createPost);
 
+FeedRouter.get("/", FeedMiddlewares.validateRequestOrigin, FeedController.getAllPosts);
+
+FeedRouter.post("/comment", FeedMiddlewares.validateRequestOrigin, FeedValidator.validateCommentCreate
+    , FeedController.postComment);
+
 export { FeedRouter };
