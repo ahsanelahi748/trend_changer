@@ -4,6 +4,8 @@ export const USER_IMAGE_PATH = "/tmp/";
 
 export enum HTTP {
     BAD_REQUEST = 400,
+    NOT_FOUND = 404,
+    FORBIDDEN = 403,
     SERVER_ERROR = 500,
     OK = 200,
     CREATED = 200

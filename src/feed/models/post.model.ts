@@ -60,6 +60,13 @@ const schema = new mongoose.Schema({
         enum: POST_TYPES
     },
     likes: [{
+        name: {
+            type: String,
+            required: true,
+            validate: (v: string) => {
+                return v.length >= 3
+            }
+        },
         userId: {
             type: mongoose.Types.ObjectId,
             required: true
