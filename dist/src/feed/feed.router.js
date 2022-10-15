@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FeedRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const feed_controller_1 = require("./feed.controller");
+const feed_middlewares_1 = require("./feed.middlewares");
+const feed_validator_1 = require("./feed.validator");
+const FeedRouter = express_1.default.Router();
+exports.FeedRouter = FeedRouter;
+FeedRouter.post("/post", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_middlewares_1.FeedMiddlewares.getFileParser(/\.(JPG|JPEG|jpg|jpeg|PNG|png)$/, 3).any(), feed_validator_1.FeedValidator.validatePostCreate, feed_controller_1.FeedController.createPost);
+FeedRouter.get("/posts", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_controller_1.FeedController.getAllPosts);
+FeedRouter.delete("/post/:postId", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.deletePost);
+FeedRouter.post("/post/:postId/like", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.createLike);
+FeedRouter.get("/post/:postId/likes", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.getAllLikes);
+FeedRouter.delete("/post/:postId/like", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.deleteLike);
+FeedRouter.post("/post/comment", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateCommentCreate, feed_controller_1.FeedController.postComment);
+FeedRouter.get("/post/:postId/comments", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.getAllComments);
+FeedRouter.delete("/post/comment/:commentId", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateCommentId, feed_controller_1.FeedController.deleteComment);
