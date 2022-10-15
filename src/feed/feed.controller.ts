@@ -147,7 +147,13 @@ export const FeedController = {
         try {
             const { id, name } = req.headers;
             const { postId } = req.params;
-            const post = await Post.findByIdAndUpdate(postId, {
+            const query = {
+                $and: [{ _id: postId }, {
+                    'likes.userId': { $ne: id }
+                }]
+            };
+            const post = await Post.findOneAndUpdate(
+                query, {
                 $push: {
                     likes: { name, userId: id }
                 }
