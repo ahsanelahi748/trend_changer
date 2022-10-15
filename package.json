@@ -2,7 +2,7 @@
   "name": "trend_changer",
   "version": "1.0.0",
   "description": "show microservice for trend changer app",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
