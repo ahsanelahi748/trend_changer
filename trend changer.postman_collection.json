@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "c11e8e38-d770-4316-bd84-890489b08d3e",
+		"name": "trend changer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "shows",
+			"item": [
+				{
+					"name": "get all shows",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "feed",
+			"item": [
+				{
+					"name": "create post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "MEDIA",
+									"type": "default"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/ahsanelahihashmi/Desktop/Screenshot 2022-10-11 at 7.42.30 PM.png"
+								},
+								{
+									"key": "pollOptions",
+									"value": "[{text:\"\"}]",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "text",
+									"value": "kajskaj",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/feed/post",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/posts",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":\"63481b795172f3407aec2327\",\n     \"content\":\"asasa\",\n     \"replyCommentId\":\"63481b795172f3407aec2327\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/feed/comment",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/6346d3368c5ab7d4cb3b3b64",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"6346d3368c5ab7d4cb3b3b64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post likes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/likes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"6346d51c45e70f8259deef94",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlike post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/like",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"6346d51c45e70f8259deef94",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/like",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"6346d51c45e70f8259deef94",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/63481b795172f3407aec2327/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"63481b795172f3407aec2327",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "name",
+								"value": "ahsan",
+								"type": "default"
+							},
+							{
+								"key": "id",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							},
+							{
+								"key": "startupId",
+								"value": "632975892f0055704955e083",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/api/feed/post/comment/63482ffaf5a7049463960f59",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"feed",
+								"post",
+								"comment",
+								"63482ffaf5a7049463960f59"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
