@@ -77,5 +77,19 @@ exports.FeedValidator = {
                 (0, common_1.sendErrorResponse)(res, common_1.HTTP.BAD_REQUEST, error.message);
             }
         });
-    }
+    },
+    validateFollowStartup(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield joi_1.default.object({
+                    startupId: joi_1.default.string().alphanum().min(24).max(24).required(),
+                }).validateAsync(req.params);
+                next();
+            }
+            catch (error) {
+                console.error(error);
+                (0, common_1.sendErrorResponse)(res, common_1.HTTP.BAD_REQUEST, error.message);
+            }
+        });
+    },
 };

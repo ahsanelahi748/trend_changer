@@ -17,7 +17,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const common_1 = require("../common");
 const feed_types_1 = require("./feed.types");
 const comment_model_1 = require("./models/comment.model");
+const follower_model_1 = require("./models/follower.model");
 const post_model_1 = require("./models/post.model");
+const reportedComments_model_1 = require("./models/reportedComments.model");
+const reportedPost_model_1 = require("./models/reportedPost.model");
 exports.FeedController = {
     createPost(req, res) {
         var _a, _b;
@@ -82,6 +85,7 @@ exports.FeedController = {
     },
     getAllPosts: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const { id } = req.headers;
             const { page } = req.query;
             let _page;
             const limit = 10;
@@ -90,8 +94,48 @@ exports.FeedController = {
                 _page = 1;
                 skip = (_page - 1) * limit;
             }
-            let query = {};
-            const posts = yield post_model_1.Post.find(query).skip(skip).limit(limit).lean();
+            const pipeline = [
+                {
+                    $match: {
+                        userId: new mongoose_1.default.Types.ObjectId(String(id))
+                    }
+                },
+                {
+                    $sort: {
+                        createdAt: -1
+                    }
+                },
+                { $skip: skip },
+                { $limit: limit },
+                {
+                    $lookup: {
+                        from: "posts",
+                        localField: "companyId",
+                        foreignField: "issuer.companyId",
+                        pipeline: [
+                            {
+                                $sort: {
+                                    createdAt: -1
+                                },
+                            },
+                            { $limit: 5 }
+                        ],
+                        as: "posts"
+                    }
+                },
+                {
+                    $unwind: {
+                        path: "$posts"
+                    }
+                },
+                { $group: { _id: null, posts: { $push: "$posts" } } },
+                {
+                    $project: {
+                        posts: 1,
+                    }
+                }
+            ];
+            const posts = yield follower_model_1.CompanyFollower.aggregate(pipeline);
             (0, common_1.sendResponse)(res, common_1.HTTP.OK, "", posts);
         }
         catch (error) {
@@ -246,4 +290,72 @@ exports.FeedController = {
             }
         });
     },
+    followStartup: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.headers;
+            const { startupId } = req.params;
+            let followDto = {
+                userId: id,
+                companyId: startupId
+            };
+            const followDoc = yield new follower_model_1.CompanyFollower(followDto).save();
+            (0, common_1.sendResponse)(res, common_1.HTTP.OK, "", followDoc);
+        }
+        catch (error) {
+            console.error(error);
+            (0, common_1.sendErrorResponse)(res, common_1.HTTP.SERVER_ERROR, "Internal server error");
+        }
+    }),
+    reportComment: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.headers;
+            const { commentId } = req.params;
+            const { reason } = req.body;
+            if (!reason || (reason === null || reason === void 0 ? void 0 : reason.length) < 1) {
+                (0, common_1.sendErrorResponse)(res, common_1.HTTP.BAD_REQUEST, "reason is required with length >= 1.");
+                return;
+            }
+            const postComment = yield comment_model_1.PostComment.findById(commentId);
+            if (!postComment) {
+                return (0, common_1.sendErrorResponse)(res, common_1.HTTP.NOT_FOUND, "Comment does not exist.");
+            }
+            let commentReportDto = {
+                commentId,
+                reason,
+                issuer: id,
+            };
+            const postReportDoc = yield new reportedComments_model_1.ReportedComment(commentReportDto).save();
+            (0, common_1.sendResponse)(res, common_1.HTTP.OK, "", postReportDoc);
+        }
+        catch (error) {
+            console.error(error);
+            (0, common_1.sendErrorResponse)(res, common_1.HTTP.SERVER_ERROR, "Internal server error");
+        }
+    }),
+    reportPost: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.headers;
+            const { postId } = req.params;
+            const { reason } = req.body;
+            if (!reason || (reason === null || reason === void 0 ? void 0 : reason.length) < 1) {
+                (0, common_1.sendErrorResponse)(res, common_1.HTTP.BAD_REQUEST, "reason is required with length >= 1.");
+                return;
+            }
+            const post = yield post_model_1.Post.findById(postId);
+            if (!post) {
+                return (0, common_1.sendErrorResponse)(res, common_1.HTTP.NOT_FOUND, "Post does not exist.");
+            }
+            let postReportDto = {
+                postId,
+                reason,
+                issuer: id,
+            };
+            const postReportDoc = yield new reportedPost_model_1.ReportedPost(postReportDto).save();
+            (0, common_1.sendResponse)(res, common_1.HTTP.OK, "", postReportDoc);
+        }
+        catch (error) {
+            console.error(error);
+            (0, common_1.sendErrorResponse)(res, common_1.HTTP.SERVER_ERROR, "Internal server error");
+        }
+    })
 };

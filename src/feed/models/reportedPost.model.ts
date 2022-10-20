@@ -7,11 +7,6 @@ const schema = new mongoose.Schema({
         required: true,
         ref: "posts",
     },
-    reportedAt: {
-        type: Number,
-        required: true,
-        default: getTimeStamp
-    },
     reason: {
         type: String,
         required: true,

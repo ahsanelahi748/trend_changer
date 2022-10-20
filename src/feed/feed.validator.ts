@@ -56,5 +56,17 @@ export const FeedValidator = {
             console.error(error);
             sendErrorResponse(res, HTTP.BAD_REQUEST, error.message);
         }
-    }
+    },
+
+    async validateFollowStartup(req: Request, res: Response, next: NextFunction) {
+        try {
+            await joi.object({
+                startupId: joi.string().alphanum().min(24).max(24).required(),
+            }).validateAsync(req.params);
+            next();
+        } catch (error: any) {
+            console.error(error);
+            sendErrorResponse(res, HTTP.BAD_REQUEST, error.message);
+        }
+    },
 };

@@ -3,7 +3,10 @@ import mongoose from 'mongoose';
 import { HTTP, sendErrorResponse, sendResponse, USER_IMAGE_PATH } from '../common';
 import { MEDIA_TYPE, POST_MEDIA_TYPE_ENUM, POST_TYPES, POST_TYPE_ENUM } from './feed.types';
 import { PostComment } from './models/comment.model';
+import { CompanyFollower } from './models/follower.model';
 import { Post } from './models/post.model';
+import { ReportedComment } from './models/reportedComments.model';
+import { ReportedPost } from './models/reportedPost.model';
 
 export const FeedController = {
 
@@ -67,6 +70,7 @@ export const FeedController = {
 
     getAllPosts: async (req: Request, res: Response) => {
         try {
+            const { id } = req.headers;
             const { page } = req.query;
             let _page;
             const limit = 10;
@@ -75,8 +79,48 @@ export const FeedController = {
                 _page = 1;
                 skip = (_page - 1) * limit;
             }
-            let query = {};
-            const posts = await Post.find(query).skip(skip).limit(limit).lean();
+            const pipeline = [
+                {
+                    $match: {
+                        userId: new mongoose.Types.ObjectId(String(id))
+                    }
+                },
+                {
+                    $sort: {
+                        createdAt: -1
+                    }
+                },
+                { $skip: skip },
+                { $limit: limit },
+                {
+                    $lookup: {
+                        from: "posts",
+                        localField: "companyId",
+                        foreignField: "issuer.companyId",
+                        pipeline: [
+                            {
+                                $sort: {
+                                    createdAt: -1
+                                },
+                            },
+                            { $limit: 5 }
+                        ],
+                        as: "posts"
+                    }
+                },
+                {
+                    $unwind:{
+                        path: "$posts"
+                    }
+                },
+                { $group: { _id: null, posts: { $push: "$posts" } } },
+                {
+                    $project:{
+                        posts: 1,
+                    }
+                }
+            ];
+            const posts = await CompanyFollower.aggregate(pipeline);
             sendResponse(res, HTTP.OK, "", posts);
         } catch (error) {
             console.error(error);
@@ -225,5 +269,73 @@ export const FeedController = {
             sendErrorResponse(res, HTTP.SERVER_ERROR, "Internal server error");
         }
     },
+
+    followStartup: async (req: Request, res: Response) => {
+        try {
+            const { id } = req.headers;
+            const { startupId } = req.params;
+            let followDto = {
+                userId: id,
+                companyId: startupId
+            };
+            const followDoc = await new CompanyFollower(followDto).save();
+            sendResponse(res, HTTP.OK, "", followDoc);
+        } catch (error) {
+            console.error(error);
+            sendErrorResponse(res, HTTP.SERVER_ERROR, "Internal server error");
+        }
+    },
+
+    reportComment: async (req: Request, res: Response) => {
+        try {
+            const { id } = req.headers;
+            const { commentId } = req.params;
+            const { reason } = req.body;
+            if (!reason || reason?.length < 1) {
+                sendErrorResponse(res, HTTP.BAD_REQUEST, "reason is required with length >= 1.");
+                return;
+            }
+            const postComment = await PostComment.findById(commentId);
+            if (!postComment) {
+                return sendErrorResponse(res, HTTP.NOT_FOUND, "Comment does not exist.");
+            }
+            let commentReportDto = {
+                commentId,
+                reason,
+                issuer: id,
+            };
+            const postReportDoc = await new ReportedComment(commentReportDto).save();
+            sendResponse(res, HTTP.OK, "", postReportDoc);
+        } catch (error) {
+            console.error(error);
+            sendErrorResponse(res, HTTP.SERVER_ERROR, "Internal server error");
+        }
+    },
+
+    reportPost: async (req: Request, res: Response) => {
+        try {
+            const { id } = req.headers;
+            const { postId } = req.params;
+            const { reason } = req.body;
+            if (!reason || reason?.length < 1) {
+                sendErrorResponse(res, HTTP.BAD_REQUEST, "reason is required with length >= 1.");
+                return;
+            }
+            const post = await Post.findById(postId);
+            if (!post) {
+                return sendErrorResponse(res, HTTP.NOT_FOUND, "Post does not exist.");
+            }
+            let postReportDto = {
+                postId,
+                reason,
+                issuer: id,
+            };
+            const postReportDoc = await new ReportedPost(postReportDto).save();
+            sendResponse(res, HTTP.OK, "", postReportDoc);
+        } catch (error) {
+            console.error(error);
+            sendErrorResponse(res, HTTP.SERVER_ERROR, "Internal server error");
+        }
+    }
 };
 

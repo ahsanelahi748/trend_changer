@@ -32,4 +32,14 @@ FeedRouter.get("/post/:postId/comments", FeedMiddlewares.validateRequestOrigin,
 
 FeedRouter.delete("/post/comment/:commentId", FeedMiddlewares.validateRequestOrigin,
     FeedValidator.validateCommentId, FeedController.deleteComment);
+
+FeedRouter.post("/follow/:startupId", FeedMiddlewares.validateRequestOrigin, FeedValidator.validateFollowStartup
+    , FeedController.followStartup);
+
+FeedRouter.post("/post/:postId/report", FeedMiddlewares.validateRequestOrigin,
+    FeedValidator.validatePostId, FeedController.reportPost);
+
+FeedRouter.post("/post/comment/:commentId/report", FeedMiddlewares.validateRequestOrigin,
+    FeedValidator.validateCommentId, FeedController.reportComment);
+
 export { FeedRouter };

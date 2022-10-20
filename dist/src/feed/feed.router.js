@@ -19,3 +19,6 @@ FeedRouter.delete("/post/:postId/like", feed_middlewares_1.FeedMiddlewares.valid
 FeedRouter.post("/post/comment", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateCommentCreate, feed_controller_1.FeedController.postComment);
 FeedRouter.get("/post/:postId/comments", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.getAllComments);
 FeedRouter.delete("/post/comment/:commentId", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateCommentId, feed_controller_1.FeedController.deleteComment);
+FeedRouter.post("/follow/:startupId", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateFollowStartup, feed_controller_1.FeedController.followStartup);
+FeedRouter.post("/post/:postId/report", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validatePostId, feed_controller_1.FeedController.reportPost);
+FeedRouter.post("/post/comment/:commentId/report", feed_middlewares_1.FeedMiddlewares.validateRequestOrigin, feed_validator_1.FeedValidator.validateCommentId, feed_controller_1.FeedController.reportComment);
