@@ -22,379 +22,520 @@
 			"name": "feed",
 			"item": [
 				{
-					"name": "create post",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "type",
-									"value": "MEDIA",
-									"type": "default"
+					"name": "post",
+					"item": [
+						{
+							"name": "create post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "MEDIA",
+											"type": "default"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/ahsanelahihashmi/Desktop/Screenshot 2022-10-11 at 7.42.30 PM.png"
+										},
+										{
+											"key": "pollOptions",
+											"value": "[{text:\"\"}]",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "text",
+											"value": "kajskaj",
+											"type": "default"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/Users/ahsanelahihashmi/Desktop/Screenshot 2022-10-11 at 7.42.30 PM.png"
-								},
-								{
-									"key": "pollOptions",
-									"value": "[{text:\"\"}]",
-									"type": "default",
-									"disabled": true
-								},
-								{
-									"key": "text",
-									"value": "kajskaj",
-									"type": "default"
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post"
+									]
 								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:3000/api/feed/post",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all posts",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/posts",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create comment",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"postId\":\"63481b795172f3407aec2327\",\n     \"content\":\"asasa\",\n     \"replyCommentId\":\"63481b795172f3407aec2327\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "get all posts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/posts",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"posts"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:3000/api/feed/comment",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"comment"
-							]
+						{
+							"name": "delete post",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/6346d3368c5ab7d4cb3b3b64",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"6346d3368c5ab7d4cb3b3b64"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "report post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reason\":\"poor post\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/634971c5e24f0985058be469/report",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"634971c5e24f0985058be469",
+										"report"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "delete post",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
+					"name": "likes",
+					"item": [
+						{
+							"name": "get post likes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/6346d51c45e70f8259deef94/likes",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"6346d51c45e70f8259deef94",
+										"likes"
+									]
+								}
 							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
+							"response": []
+						},
+						{
+							"name": "unlike post",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/6346d51c45e70f8259deef94/like",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"6346d51c45e70f8259deef94",
+										"like"
+									]
+								}
 							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/6346d3368c5ab7d4cb3b3b64",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"6346d3368c5ab7d4cb3b3b64"
-							]
+							"response": []
+						},
+						{
+							"name": "like post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/6346d51c45e70f8259deef94/like",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"6346d51c45e70f8259deef94",
+										"like"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "get post likes",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
+					"name": "comment",
+					"item": [
+						{
+							"name": "create comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"postId\":\"63481b795172f3407aec2327\",\n     \"content\":\"asasa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/comment",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"comment"
+									]
+								}
 							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
+							"response": []
+						},
+						{
+							"name": "report comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reason\":\"poor comment\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/comment/63483021f5a7049463960f5b/report",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"comment",
+										"63483021f5a7049463960f5b",
+										"report"
+									]
+								}
 							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/likes",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"6346d51c45e70f8259deef94",
-								"likes"
-							]
+							"response": []
+						},
+						{
+							"name": "get all comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/63481b795172f3407aec2327/comments",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"63481b795172f3407aec2327",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/post/comment/63482ffaf5a7049463960f59",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"post",
+										"comment",
+										"63482ffaf5a7049463960f59"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "unlike post",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
+					"name": "follow",
+					"item": [
+						{
+							"name": "follow startup",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "name",
+										"value": "ahsan",
+										"type": "default"
+									},
+									{
+										"key": "id",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									},
+									{
+										"key": "startupId",
+										"value": "632975892f0055704955e083",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{TREND_CHANGER_URL}}/api/feed/follow/632975892f0055704955e083",
+									"host": [
+										"{{TREND_CHANGER_URL}}"
+									],
+									"path": [
+										"api",
+										"feed",
+										"follow",
+										"632975892f0055704955e083"
+									]
+								}
 							},
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/like",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"6346d51c45e70f8259deef94",
-								"like"
-							]
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "like post",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/6346d51c45e70f8259deef94/like",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"6346d51c45e70f8259deef94",
-								"like"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all comments",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/63481b795172f3407aec2327/comments",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"63481b795172f3407aec2327",
-								"comments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete comment",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "name",
-								"value": "ahsan",
-								"type": "default"
-							},
-							{
-								"key": "id",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							},
-							{
-								"key": "startupId",
-								"value": "632975892f0055704955e083",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "localhost:3000/api/feed/post/comment/63482ffaf5a7049463960f59",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"feed",
-								"post",
-								"comment",
-								"63482ffaf5a7049463960f59"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
